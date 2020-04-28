@@ -29,7 +29,7 @@ namespace MovieManager.Web.Controllers
     public ActionResult<string[]> GetCategories()
     {
       return Ok(_unitOfWork
-          .CategoryRepository
+          .Categories
           .GetAll()
           .Select(category => category.CategoryName)
           .ToArray());
@@ -45,7 +45,7 @@ namespace MovieManager.Web.Controllers
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult<CategoryWithMoviesDto> GetById(int id)
     {
-      Category category = _unitOfWork.CategoryRepository.GetByIdWithMovies(id);
+      Category category = _unitOfWork.Categories.GetByIdWithMovies(id);
       if (category == null)
       {
         return NotFound();
@@ -65,7 +65,7 @@ namespace MovieManager.Web.Controllers
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult<MovieDto[]> GetMoviesByCategoryId(int id)
     {
-      Category category = _unitOfWork.CategoryRepository.GetByIdWithMovies(id);
+      Category category = _unitOfWork.Categories.GetByIdWithMovies(id);
       if (category == null)
       {
         return NotFound();
