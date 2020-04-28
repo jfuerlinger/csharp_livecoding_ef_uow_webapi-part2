@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30001.183
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManager.Core", "MovieManager.Core\MovieManager.Core.csproj", "{180E45B9-DDD6-4CC3-8F60-7AB09604F502}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManager.ImportConsole", "MovieManager.ImportConsole\MovieManager.ImportConsole.csproj", "{CC9F08AA-EB54-4559-8B0C-0B0D8F0B11D6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManager.Persistence", "MovieManager.Persistence\MovieManager.Persistence.csproj", "{55179704-A3C6-4883-91E1-83937D67D9CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils", "Utils\Utils.csproj", "{6086E7BB-2814-4B79-8F5F-84FA792CBD52}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManager.Test", "MovieManager.Test\MovieManager.Test.csproj", "{52ECC38C-6C60-4A23-8215-A671EA887B7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieManager.Web", "MovieManager.Web\MovieManager.Web.csproj", "{6652A832-43FB-4422-8803-D001BC610E66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieManager.ConsoleApp", "MovieManager.ConsoleApp\MovieManager.ConsoleApp.csproj", "{1185F7D4-6BB0-4612-969F-F6564179E797}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{180E45B9-DDD6-4CC3-8F60-7AB09604F502}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{180E45B9-DDD6-4CC3-8F60-7AB09604F502}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{180E45B9-DDD6-4CC3-8F60-7AB09604F502}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{180E45B9-DDD6-4CC3-8F60-7AB09604F502}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC9F08AA-EB54-4559-8B0C-0B0D8F0B11D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC9F08AA-EB54-4559-8B0C-0B0D8F0B11D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC9F08AA-EB54-4559-8B0C-0B0D8F0B11D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC9F08AA-EB54-4559-8B0C-0B0D8F0B11D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55179704-A3C6-4883-91E1-83937D67D9CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55179704-A3C6-4883-91E1-83937D67D9CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55179704-A3C6-4883-91E1-83937D67D9CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55179704-A3C6-4883-91E1-83937D67D9CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6086E7BB-2814-4B79-8F5F-84FA792CBD52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6086E7BB-2814-4B79-8F5F-84FA792CBD52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6086E7BB-2814-4B79-8F5F-84FA792CBD52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6086E7BB-2814-4B79-8F5F-84FA792CBD52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52ECC38C-6C60-4A23-8215-A671EA887B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52ECC38C-6C60-4A23-8215-A671EA887B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52ECC38C-6C60-4A23-8215-A671EA887B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52ECC38C-6C60-4A23-8215-A671EA887B7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6652A832-43FB-4422-8803-D001BC610E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6652A832-43FB-4422-8803-D001BC610E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6652A832-43FB-4422-8803-D001BC610E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6652A832-43FB-4422-8803-D001BC610E66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1185F7D4-6BB0-4612-969F-F6564179E797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1185F7D4-6BB0-4612-969F-F6564179E797}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1185F7D4-6BB0-4612-969F-F6564179E797}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1185F7D4-6BB0-4612-969F-F6564179E797}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {712762BB-3652-4346-ABD8-352133FD85B0}
+	EndGlobalSection
+EndGlobal
