@@ -5,34 +5,35 @@ using MovieManager.Core.Entities;
 using MovieManager.Persistence;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MovieManager.ImportConsole
 {
   class Program
   {
-    static void Main()
+    static async Task Main()
     {
-      InitData();
-      AnalyzeData();
+      await InitDataAsync();
+      await AnalyzeDataAsync();
 
       Console.WriteLine();
       Console.Write("Beenden mit Eingabetaste ...");
       Console.ReadLine();
     }
 
-    private static void InitData()
+    private async static Task InitDataAsync()
     {
       Console.WriteLine("***************************");
       Console.WriteLine("          Import");
       Console.WriteLine("***************************");
 
       Console.WriteLine("Import der Movies und Categories in die Datenbank");
-      using (UnitOfWork unitOfWork = new UnitOfWork())
+      await using (UnitOfWork unitOfWork = new UnitOfWork())
       {
         Console.WriteLine("Datenbank löschen");
-        unitOfWork.DeleteDatabase();
+        await unitOfWork.DeleteDatabaseAsync();
         Console.WriteLine("Datenbank migrieren");
-        unitOfWork.MigrateDatabase();
+        await unitOfWork.MigrateDatabaseAsync();
         Console.WriteLine("Movies/Categories werden eingelesen");
 
         var movies = ImportController.ReadFromCsv().ToArray();
@@ -48,38 +49,38 @@ namespace MovieManager.ImportConsole
 
         Console.WriteLine($"  Es wurden {movies.Count()} Movies in {categories.Count()} Kategorien eingelesen!");
 
-        unitOfWork.MovieRepository.AddRange(movies);
-        unitOfWork.Save();
+        unitOfWork.Movies.AddRange(movies);
+        await unitOfWork.SaveChangesAsync();
 
         Console.WriteLine();
       }
     }
 
-    private static void AnalyzeData()
+    private static async Task AnalyzeDataAsync()
     {
       Console.WriteLine("***************************");
       Console.WriteLine("        Statistik");
       Console.WriteLine("***************************");
 
 
-      using (IUnitOfWork unitOfWork = new UnitOfWork())
+      await using (IUnitOfWork unitOfWork = new UnitOfWork())
       {
         // Längster Film: Bei mehreren gleichlangen Filmen, soll jener angezeigt werden, dessen Titel im Alphabet am weitesten vorne steht.
         // Die Dauer des längsten Films soll in Stunden und Minuten angezeigt werden!
-        Movie longestMovie = unitOfWork.MovieRepository.GetLongestMovie();
+        Movie longestMovie = unitOfWork.Movies.GetLongestMovie();
         Console.WriteLine($"Längster Film: {longestMovie.Title}; Länge: {GetDurationAsString(longestMovie.Duration, false)}");
         Console.WriteLine();
 
 
         // Top Kategorie:
         //   - Jene Kategorie mit den meisten Filmen.
-        CategoryStatisticEntry topCategory = unitOfWork.CategoryRepository.GetCategoryWithMostMovies();
+        CategoryStatisticEntry topCategory = unitOfWork.Categories.GetCategoryWithMostMovies();
         Console.WriteLine($"Kategorie mit den meisten Filmen: '{topCategory.Category.CategoryName}'; Filme: {topCategory.NumberOfMovies}");
         Console.WriteLine();
 
         // Jahr der Kategorie "Action":
         //  - In welchem Jahr wurden die meisten Action-Filme veröffentlicht?
-        int yearOfAction = unitOfWork.CategoryRepository.GetYearWithMostPublicationsForCategory("Action");
+        int yearOfAction = unitOfWork.Categories.GetYearWithMostPublicationsForCategory("Action");
         Console.WriteLine($"Jahr der Action-Filme: {yearOfAction}");
         Console.WriteLine();
 
@@ -91,7 +92,7 @@ namespace MovieManager.ImportConsole
         Console.WriteLine();
         Console.WriteLine("Kategorie   Anzahl   Gesamtdauer");
         Console.WriteLine("================================");
-        foreach (var entry in unitOfWork.CategoryRepository.GetCategoryStatistics())
+        foreach (var entry in unitOfWork.Categories.GetCategoryStatistics())
         {
           Console.WriteLine($"{entry.Category.CategoryName,-12} {entry.NumberOfMovies,-7} {GetDurationAsString(entry.TotalDuration, false),11}");
         }
@@ -106,7 +107,7 @@ namespace MovieManager.ImportConsole
         Console.WriteLine();
         Console.WriteLine("Kategorie    durchschn. Gesamtdauer");
         Console.WriteLine("===================================");
-        foreach (var entry in unitOfWork.CategoryRepository.GetCategoriesWithAverageLengthOfMovies())
+        foreach (var entry in unitOfWork.Categories.GetCategoriesWithAverageLengthOfMovies())
         {
           Console.WriteLine($"{entry.Category.CategoryName,-12} {GetDurationAsString(entry.AverageLength),-15}");
         }
