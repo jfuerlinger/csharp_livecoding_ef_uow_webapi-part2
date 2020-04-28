@@ -1,6 +1,8 @@
-﻿using MovieManager.Core.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using MovieManager.Core.Contracts;
 using MovieManager.Core.Entities;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MovieManager.Persistence
 {
@@ -21,55 +23,55 @@ namespace MovieManager.Persistence
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public Movie[] GetAllByCatId(int id)
-      => _dbContext.Movies
+    public async Task<Movie[]> GetAllByCatIdAsync(int id)
+      => await _dbContext.Movies
             .Where(m => m.CategoryId == id)
             .OrderBy(m => m.Title)
-            .ToArray();
+            .ToArrayAsync();
 
     /// <summary>
     /// Liefert den Film mit der übergebenen Id (null wenn nicht gefunden)
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public Movie GetById(int id)
-      => _dbContext.Movies
-            .SingleOrDefault(m => m.Id == id);
+    public async Task<Movie> GetByIdAsync(int id)
+      => await _dbContext.Movies
+            .SingleOrDefaultAsync(m => m.Id == id);
 
     /// <summary>
     /// Liefert die Anzahl aller Filme in der Datenbank
     /// </summary>
     /// <returns></returns>
-    public int GetCount()
-      => _dbContext.Movies
-          .Count();
+    public async Task<int> GetCountAsync()
+      => await _dbContext.Movies
+          .CountAsync();
 
     /// <summary>
     /// Liefert den Film mit der längsten Dauer
     /// </summary>
     /// <returns></returns>
-    public Movie GetLongestMovie()
-      => _dbContext.Movies
+    public async Task<Movie> GetLongestMovieAsync()
+      => await _dbContext.Movies
           .OrderByDescending(m => m.Duration)
           .ThenBy(m => m.Title)
-          .First();
+          .FirstAsync();
 
-    public void AddRange(Movie[] movies)
-      => _dbContext.Movies.AddRange(movies);
+    public async Task AddRangeAsync(Movie[] movies)
+      => await _dbContext.Movies.AddRangeAsync(movies);
 
-    public Movie[] GetAll()
-      => _dbContext.Movies
+    public async Task<Movie[]> GetAllAsync()
+      => await _dbContext.Movies
            .OrderBy(m => m.Title)
-           .ToArray();
+           .ToArrayAsync();
 
-    public void Add(Movie movie)
-      => _dbContext.Movies.Add(movie);
+    public async Task AddAsync(Movie movie)
+      => await _dbContext.Movies.AddAsync(movie);
 
     /// <summary>
     /// Fügt neuen Film in der Datenbank hinzu
     /// </summary>
     /// <param name="movie"></param>
-    public void Insert(Movie movie)
-      => _dbContext.Movies.Add(movie);
+    public async Task InsertAsync(Movie movie)
+      => await _dbContext.Movies.AddAsync(movie);
   }
 }

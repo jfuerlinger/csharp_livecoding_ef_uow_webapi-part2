@@ -1,16 +1,17 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace MovieManager.Core.Contracts
 {
-    public interface IUnitOfWork : IDisposable
-    {
+  public interface IUnitOfWork : IAsyncDisposable
+  {
 
-        IMovieRepository MovieRepository { get; }
-        ICategoryRepository CategoryRepository { get; }
-        void Save();
+    IMovieRepository Movies { get; }
+    ICategoryRepository Categories { get; }
 
-        void DeleteDatabase();
-
-        void MigrateDatabase();
-    }
+    Task<int> SaveChangesAsync();
+    Task DeleteDatabaseAsync();
+    Task MigrateDatabaseAsync();
+    Task CreateDatabaseAsync();
+  }
 }
