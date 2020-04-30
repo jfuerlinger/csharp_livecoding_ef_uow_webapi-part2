@@ -4,6 +4,7 @@ using MovieManager.Core.DTOs;
 using MovieManager.Core.Entities;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MovieManager.Persistence
 {
@@ -20,19 +21,19 @@ namespace MovieManager.Persistence
     /// Liefert eine Liste aller Kategorien sortiert nach dem CategoryName
     /// </summary>
     /// <returns></returns>
-    public Category[] GetAll()
-      => _dbContext.Categories
+    public async Task<Category[]> GetAllAsync()
+      => await _dbContext.Categories
             .OrderBy(c => c.CategoryName)
-            .ToArray();
+            .ToArrayAsync();
 
     /// <summary>
     /// Liefert die Kategorie mit der übergebenen Id --> null wenn nicht gefunden
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public Category GetById(int id)
-      => _dbContext.Categories
-            .SingleOrDefault(c => c.Id == id);
+    public async Task<Category> GetByIdAsync(int id)
+      => await _dbContext.Categories
+            .SingleOrDefaultAsync(c => c.Id == id);
 
 
     /// <summary>
@@ -102,7 +103,7 @@ namespace MovieManager.Persistence
     /// Neue Kategorie wird in Datenbank eingefügt
     /// </summary>
     /// <param name="category"></param>
-    public void Insert(Category category) => _dbContext.Categories.Add(category);
+    public async Task InsertAsync(Category category) => await _dbContext.Categories.AddAsync(category);
 
     /// <summary>
     /// Kategorie per Id laden.
@@ -111,5 +112,7 @@ namespace MovieManager.Persistence
       => _dbContext.Categories
         .Include(c => c.Movies)
         .FirstOrDefault(c => c.Id == id);
+
+    public void Remove(Category category) => _dbContext.Categories.Remove(category);
   }
 }
